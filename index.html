@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Do Hyeon", sans-serif;
+        font-size: 16px;
+      }
+
+      body {
+        background-color: #ffecc7;
+      }
+
+      header > h1 {
+        text-align: center;
+        padding: 20px;
+        font-size: 4em;
+      }
+
+      .gameResult > h1 {
+        text-align: center;
+        padding: 20px;
+        font-size: 6em;
+      }
+
+      .choice {
+        text-align: center;
+      }
+
+      .choice > button {
+        width: 8em;
+        background-color: #85a392;
+        border: none;
+        color: #ffffff;
+        padding: 15px 0;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 2em;
+      }
+
+      @media (max-width: 480px) {
+        header > h1 {
+          padding: 2px;
+          font-size: 3em;
+        }
+        .gameResult > h1 {
+          padding: 20px;
+          font-size: 4em;
+        }
+        .choice > button {
+          width: 6em;
+          font-size: 1.5em;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>가위바위보 게임</h1>
+    </header>
+
+    <div class="gameResult">
+      <h1></h1>
+    </div>
+    <div class="choice">
+      <button id="startButton" onclick="run()">게임시작</button>
+    </div>
+
+    <script>
+      const RockPaperScissorsKoreanList = ["바위", "보", "가위"];
+      const RockPaperScissorsEmojiObject = { 바위: "✊", 보: "📃", 가위: "✂️" };
+
+      const run = (event) => {
+        let myChoice = prompt("가위, 바위, 보 중에 하나를 입력하세요.");
+
+        let numberForComputerChoice = Math.floor(Math.random() * 3);
+
+        let computerChoice =
+          RockPaperScissorsKoreanList[numberForComputerChoice];
+
+        let compareResult = "";
+
+        switch (`${myChoice} vs ${computerChoice}`) {
+          case "가위 vs 보":
+          case "바위 vs 가위":
+          case "보 vs 바위":
+            compareResult = `${RockPaperScissorsEmojiObject[myChoice]} vs ${RockPaperScissorsEmojiObject[computerChoice]}<br> 승리`;
+            break;
+          case "가위 vs 가위":
+          case "바위 vs 바위":
+          case "보 vs 보":
+            compareResult = `${RockPaperScissorsEmojiObject[myChoice]} vs ${RockPaperScissorsEmojiObject[computerChoice]}<br> 무승부`;
+            break;
+          case "가위 vs 바위":
+          case "바위 vs 보":
+          case "보 vs 가위":
+            compareResult = `${RockPaperScissorsEmojiObject[myChoice]} vs ${RockPaperScissorsEmojiObject[computerChoice]}<br> 패배`;
+            break;
+          default:
+            compareResult = "잘 못 입력하셨네요!";
+        }
+        const gameResultDiv = document.querySelector(".gameResult");
+        gameResultDiv.style.display = "block";
+        gameResultDiv.querySelector("h1").innerHTML = compareResult;
+        document.querySelector('#startButton').innerHTML = '다시하기';
+      };
+    </script>
+  </body>
+</html>
