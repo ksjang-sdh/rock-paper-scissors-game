@@ -85,14 +85,17 @@
       const RockPaperScissorsKoreanList = ["바위", "보", "가위"];
       const RockPaperScissorsEmojiObject = { 바위: "✊", 보: "📃", 가위: "✂️" };
 
+
       const run = (event) => {
+        // 1. 사용자의 입력을 받는 부분
         let myChoice = prompt("가위, 바위, 보 중에 하나를 입력하세요.");
 
+        // 2. 컴퓨터의 패를 받는 부분
         let numberForComputerChoice = Math.floor(Math.random() * 3);
-
         let computerChoice =
           RockPaperScissorsKoreanList[numberForComputerChoice];
 
+        // 3. 비교 결과를 받는 부분
         let compareResult = "";
 
         switch (`${myChoice} vs ${computerChoice}`) {
@@ -114,6 +117,8 @@
           default:
             compareResult = "잘 못 입력하셨네요!";
         }
+
+        // 4. 게임의 결과를 HTML에 반영하는 부분
         const gameResultDiv = document.querySelector(".gameResult");
         gameResultDiv.style.display = "block";
         gameResultDiv.querySelector("h1").innerHTML = compareResult;
